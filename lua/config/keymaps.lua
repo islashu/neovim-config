@@ -6,14 +6,15 @@ local map = vim.keymap.set
 
 map("i", "jj", "<Esc>")
 
-vim.keymap.set("n", "<A-h>", ":BufferLineCyclePrev<CR>")
+-- Unable to put keymappings in bufferline file for some reason, I believe that it was loading its own lazyVim config folder and not the one in /plugins
 vim.keymap.set("n", "<A-l>", ":BufferLineCycleNext<CR>")
+vim.keymap.set("n", "<A-h>", ":BufferLineCyclePrev<CR>")
 -- focus on same window after opening a buffer
-vim.keymap.set("n", "<A-d>l", ":BufferLineCloseRight")
-vim.keymap.set("n", "<A-d>h", ":BufferLineCloseLeft")
+vim.keymap.set("n", "<A-4>", ":BufferLinePickClose<CR>")
+vim.keymap.set("n", "<F4>", ":BufferLineCloseOthers<CR>")
 -- insert a delete left bufferline
--- splitting window
 
+-- splitting window
 -- Set up github copilot, cosnippet need some improvement
 -- Allow the selection of copilolt suggestion using tabs
 -- Set up for colours
@@ -24,3 +25,9 @@ vim.keymap.set("n", "<C-z>", "<Nop>")
 -- understand how to insert keys within their individual lua files for opts
 -- disable lua
 -- able to search across the entire project for a specific line
+
+-- Toggle term
+-- How to easily jump between tabs of terminal and neotree and bufferline
+-- diable ctrl + / -> to start the terminal
+-- Add split window for multiple terminals
+vim.keymap.set("n", "<C-/>", "<Nop>")
