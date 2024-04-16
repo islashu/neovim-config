@@ -2,7 +2,7 @@ return {
   "nvim-telescope/telescope.nvim",
   require("telescope").setup({
     defaults = {
-      initial_mode = "normal",
+      initial_mode = "insert",
     },
   }),
 }
