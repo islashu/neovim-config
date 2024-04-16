@@ -91,8 +91,8 @@ return {
           -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
           cmp.config.compare.exact,
           cmp.config.compare.score,
-          cmp.config.compare.recently_used,
           cmp.config.compare.locality,
+          cmp.config.compare.recently_used,
           cmp.config.compare.kind,
           cmp.config.compare.sort_text,
           cmp.config.compare.length,
@@ -149,24 +149,11 @@ return {
         { name = "nvim_lua" },
         { name = "buffer" },
         { name = "neorg" },
+        -- { name = "cmdline" },
       },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
-      },
-    })
-
-    cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        { name = "cmdline" },
-      },
-      formatting = {
-        -- fields = { 'abbr' },
-        format = function(_, vim_item)
-          vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
-          return vim_item
-        end,
       },
     })
   end,
