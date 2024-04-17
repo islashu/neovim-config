@@ -9,6 +9,7 @@ return {
       "diff",
       "html",
       "javascript",
+      "typescript",
       "jsdoc",
       "json",
       "jsonc",
@@ -30,5 +31,6 @@ return {
       "perl",
       "php",
     },
+    auto_install = true,
   },
 }
