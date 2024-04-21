@@ -4,3 +4,4 @@
 --
 --
 vim.opt.list = false
+vim.opt.clipboard = "unnamedplus"

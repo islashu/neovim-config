@@ -114,13 +114,23 @@ return {
         -- Set `select` to `false` to only confirm explicitly selected items.
 
         ["<CR>"] = cmp.mapping(cmp.mapping.confirm({ select = false })),
-        ["<Tab>"] = vim.schedule_wrap(function(fallback)
-          if cmp.visible() and has_words_before() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          local copilot = require("copilot.suggestion")
+          if copilot.is_visible() then
+            copilot.accept()
+          elseif cmp.visible() then
+            local entry = cmp.get_selected_entry()
+            if not entry then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            else
+              cmp.confirm()
+            end
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
           else
             fallback()
           end
-        end),
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
@@ -146,7 +156,7 @@ return {
 
       sources = {
         -- (Ben) indicate here the different sources of autocomplete that you might need
-        --      { name = "copilot" },
+        { name = "copilot" },
         -- Other Sources
         { name = "nvim_lsp" },
         { name = "path" },
@@ -159,6 +169,32 @@ return {
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
+      },
+      view = {
+        entries = {
+          name = "custom",
+          selection_order = "top_down",
+        },
+        docs = {
+          auto_open = false,
+        },
+      },
+      window = {
+        completion = {
+          border = "rounded",
+          winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:FloatBorder,Search:None",
+          col_offset = -3,
+          side_padding = 1,
+          scrollbar = false,
+          scrolloff = 8,
+        },
+        documentation = {
+          border = "rounded",
+          winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,Search:None",
+        },
+      },
+      experimental = {
+        ghost_text = { hl_group = "CopilotSuggestion", enabled = true },
       },
     })
   end,
