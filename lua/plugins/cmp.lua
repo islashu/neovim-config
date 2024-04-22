@@ -126,26 +126,26 @@ return {
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
 
-        ["<CR>"] = cmp.mapping(cmp.mapping.confirm({ select = false })),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          local copilot = require("copilot.suggestion")
-          if copilot.is_visible() then
-            copilot.accept()
-            cmp.confirm()
-          elseif cmp.visible() then
-            local entry = cmp.get_selected_entry()
-            if not entry then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-              cmp.confirm()
-            else
-              cmp.confirm()
-            end
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+        ["<CR>"] = cmp.mapping(cmp.mapping.confirm({ select = true })),
+        -- ["<Tab>"] = cmp.mapping(function(fallback)
+        --   local copilot = require("copilot.suggestion")
+        --   if copilot.is_visible() then
+        --     copilot.accept()
+        --     cmp.confirm()
+        --   elseif cmp.visible() then
+        --     local entry = cmp.get_selected_entry()
+        --     if not entry then
+        --       cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        --       -- cmp.confirm()
+        --     else
+        --       cmp.confirm()
+        --     end
+        --   elseif luasnip.expand_or_jumpable() then
+        --     luasnip.expand_or_jump()
+        --   else
+        --     fallback()
+        --   end
+        -- end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()

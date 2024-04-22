@@ -11,7 +11,7 @@ return {
       desc = "Explorer NeoTree (Root Dir)",
     },
     {
-      "<leader>4",
+      "<leader>ec",
       function()
         require("neo-tree.command").execute({ action = "close" })
       end,
