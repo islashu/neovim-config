@@ -118,6 +118,7 @@ return {
           local copilot = require("copilot.suggestion")
           if copilot.is_visible() then
             copilot.accept()
+            cmp.confirm()
           elseif cmp.visible() then
             local entry = cmp.get_selected_entry()
             if not entry then
@@ -150,9 +151,10 @@ return {
           return vim_item
         end,
       },
-      -- completion = {
-      --   completeopt = "menu,menuone,noinsert",
-      -- },
+      completion = {
+        completeopt = "menu,menuone,noinsert",
+        timeout = 500,
+      },
 
       sources = {
         -- (Ben) indicate here the different sources of autocomplete that you might need
