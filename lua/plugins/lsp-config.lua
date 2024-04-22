@@ -53,7 +53,7 @@ return {
       formatting_options = nil,
       timeout_ms = nil,
     },
-    -- LSP Server Settings
+    -- (Explanation) LSP Server Settings, you must insert the specific language server here to allow for autocomplete for the language
     ---@type lspconfig.options
     servers = {
       lua_ls = {
