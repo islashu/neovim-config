@@ -3,6 +3,7 @@ return {
   opts = {
     highlight = { enable = true },
     indent = { enable = true },
+    -- (Explanation) Insert your language to allow for syntax highlight and better searching using /
     ensure_installed = {
       "bash",
       "c",

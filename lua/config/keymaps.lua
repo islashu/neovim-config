@@ -6,7 +6,7 @@ local map = vim.keymap.set
 
 map("i", "jj", "<Esc>")
 
--- Create highlight groups to change copilot ghost text
+-- (Explanation) Create highlight groups to change copilot ghost text
 vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#a0eb96" })
 
 --BufferLine config, certain bufferline mappings cannot be done here and can be found in the plugin folders
