@@ -37,67 +37,66 @@
 -- }
 
 return {
-  "zbirenbaum/copilot.lua",
-  {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    opts = {
-      suggestion = {
-        auto_trigger = true,
-        keymap = {
-          accept = "<Mq-j>",
-          accept_line = "<M-l>",
-          accept_word = "<M-k>",
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<M-c>",
-        },
-      },
-    },
-  },
-  -- -- Disabling these features as copilot-cmp will take over, I have added these many properties despite disabling them because
-  -- -- it is easier to manage in the future if i decide not to use copilot-cmp.lua
-  -- -- If you want any configuration of copilot-cmp, go to autocomplete/copilot-cmp
-  -- panel = {
-  --   enabled = false,
-  --   auto_refresh = false,
-  --   keymap = {
-  --     jump_prev = "[[",
-  --     jump_next = "]]",
-  --     accept = "<CR>",
-  --     refresh = "gr",
-  --     open = "<M-CR>",
+  -- We are using the vim instead of the lua version as the lua version allows ghost text from every source which is annoying
+  -- copilot.vim only allow ghost text from the copilot source.
+  "github/copilot.vim",
+  -- "zbirenbaum/copilot.lua",
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   event = "InsertEnter",
+  --   opts = {
+  --     suggestion = {
+  --       auto_trigger = true,
+  --       keymap = {
+  --         accept = "<Mq-j>",
+  --         accept_line = "<M-l>",
+  --         accept_word = "<M-k>",
+  --         next = "<M-]>",
+  --         prev = "<M-[>",
+  --         dismiss = "<M-c>",
+  --       },
+  --     },
   --   },
-  --   layout = {
-  --     position = "bottom", -- | top | left | right
-  --     ratio = 0.4,
-  --   },
-  -- },
-  -- suggestion = {
-  --   enabled = true,
-  --   auto_trigger = true,
-  --   debounce = 25,
-  --   keymap = {
-  --     accept = "<Tab>",
-  --     accept_word = false,
-  --     accept_line = false,
-  --     next = "<M-]>",
-  --     prev = "<M-[>",
-  --     dismiss = "<C-]>",
-  --   },
-  -- },
-  -- filetypes = {
-  --   yaml = false,
-  --   markdown = false,
-  --   help = false,
-  --   gitcommit = false,
-  --   gitrebase = false,
-  --   hgcommit = false,
-  --   svn = false,
-  --   cvs = false,
-  --   ["."] = false,
-  -- },
-  --
-  -- copilot_node_command = "node", -- Node.js version must be > 18.x
-  -- server_opts_overrides = {},
 }
+-- -- Disabling these features as copilot-cmp will take over, I have added these many properties despite disabling them because
+-- -- it is easier to manage in the future if i decide not to use copilot-cmp.lua
+-- -- If you want any configuration of copilot-cmp, go to autocomplete/copilot-cmp
+-- panel = {
+--   enabled = false,
+--   auto_refresh = false,
+--   keymap = {
+--     jump_prev = "[[",
+--     jump_next = "]]",
+--     accept = "<CR>",
+--     refresh = "gr",
+--     open = "<M-CR>",
+--   },
+--   layout = {
+--     position = "bottom", -- | top | left | right
+--     ratio = 0.4,
+--   },
+-- },
+-- suggestion = {
+--   enabled = true,
+--   auto_trigger = true,
+--   debounce = 25,
+--   keymap = {
+--     accept = "<Tab>",
+--     accept_word = false,
+--     accept_line = false,
+--     next = "<M-]>",
+--     prev = "<M-[>",
+--     dismiss = "<C-]>",
+--   },
+-- },
+-- filetypes = {
+--   yaml = false,
+--   markdown = false,
+--   help = false,
+--   gitcommit = false,
+--   gitrebase = false,
+--   hgcommit = false,
+--   svn = false,
+--   cvs = false,
+--   ["."] = false,
+-- },
