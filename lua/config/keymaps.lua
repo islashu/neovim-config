@@ -12,13 +12,18 @@ vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#a0eb96" })
 --BufferLine config, certain bufferline mappings cannot be done here and can be found in the plugin folders
 map("n", "<A-h>", ":BufferLineCyclePrev<CR>")
 vim.keymap.set("n", "<A-l>", ":BufferLineCycleNext<CR>")
-vim.keymap.set("n", "<A-4>", ":BufferLinePickClose<CR>")
-vim.keymap.set("n", "<F4>", ":BufferLineCloseOthers<CR>")
-vim.keymap.set("n", "<A-j>", "<Nop>")
-vim.keymap.set("n", "<A-k>", "<Nop>")
+vim.keymap.set("n", "<leader>td", ":BufferLinePickClose<CR>")
+vim.keymap.set("n", "<leader>ta", ":BufferLineCloseOthers<CR>")
+vim.keymap.set("n", "<leader>te", ":BufferLineCloseAllButCurrent<CR>")
+vim.keymap.set("n", "<leader>tr", ":BufferLine")
+vim.keymap.set("n", "<A-n>", ":m +1<CR>")
+vim.keymap.set("n", "<A-m>", ":m -2<CR>")
 
+vim.keymap.set("n", "<A-j>", "}")
+vim.keymap.set("n", "<A-k>", "{")
 -- Allow for pasting of last copied value even after performing delete
 vim.keymap.set("n", "<s-p>", '"0p')
+vim.keymap.set("n", "<C-z>", "<Nop>")
 
 -- Trying to remove terminal
 vim.keymap.set("n", "<c-/>", "<Nop>")
