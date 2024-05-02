@@ -32,3 +32,23 @@ vim.keymap.del("n", "<c-/>")
 -- Toggle term
 vim.keymap.set("n", "<C-/>", "<cmd>close<cr>")
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+
+
+-- Custom function to delete current buffer
+vim.api.nvim_create_user_command("BufferLineDeleteCurrent",
+function()
+  local current = vim.fn.bufnr("%")
+  local buflist = vim.fn.getbufinfo({ buflisted = 1 })
+  for _, buf in ipairs(buflist) do
+    if buf.bufnr == current then
+      print("deleting buffer")
+      -- close neo tree 
+      vim.cmd([[Neotree close]])
+      vim.cmd("bdelete " .. buf.bufnr)
+      return
+    end
+  end
+end
+  , { range = true })
+vim.keymap.set("n", "<leader>4", "<cmd>BufferLineDeleteCurrent<cr>", { desc = "Delete Current Buffer" })
+

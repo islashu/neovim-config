@@ -38,15 +38,15 @@ return {
         separator = true,
       },
     },
-    color_icons = true, -- whether or not to add the filetype icon highlights
+    color_icons = true,       -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- disable filetype icons for buffers
     show_buffer_close_icons = true,
     show_close_icon = true,
     show_tab_indicators = true,
-    show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
+    show_duplicate_prefix = true,    -- whether to show duplicate buffer prefix
     duplicates_across_groups = true, -- whether to consider duplicate paths in different groups as duplicates
-    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-    move_wraps_at_ends = false, -- whether or not the move command "wraps" at the first or last position
+    persist_buffer_sort = true,      -- whether or not custom sorted buffers should persist
+    move_wraps_at_ends = false,      -- whether or not the move command "wraps" at the first or last position
     enforce_regular_tabs = false,
     always_show_bufferline = true,
     hover = {
@@ -55,4 +55,13 @@ return {
       reveal = { "close" },
     },
   },
+  -- getCurrentBuffer = function()
+  --   local current = vim.fn.bufnr("%")
+  --   local buflist = vim.fn.getbufinfo({ buflisted = 1 })
+  --   for _, buf in ipairs(buflist) do
+  --     if buf.bufnr == current then
+  --       return buf
+  --     end
+  --   end
+  -- end,
 }
