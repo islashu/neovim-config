@@ -178,9 +178,9 @@ return {
       -- (Explanation) indicate here the different options that appear in the autocomplete menu
       -- Other Sources
       sources = {
-        {
-          name = "copilot",
-        },
+        -- {
+        --   name = "copilot",
+        -- },
         { name = "nvim_lsp" },
         { name = "path" },
         { name = "luasnip" },

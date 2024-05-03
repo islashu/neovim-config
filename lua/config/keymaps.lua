@@ -46,6 +46,7 @@ function()
       vim.cmd([[Neotree close]])
       vim.cmd("bdelete " .. buf.bufnr)
       return
+      end
     end
   end
 end
