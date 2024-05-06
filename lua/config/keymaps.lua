@@ -10,8 +10,10 @@ map("i", "jj", "<Esc>")
 vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#a0eb96" })
 
 --BufferLine config, certain bufferline mappings cannot be done here and can be found in the plugin folders
-map("n", "<A-h>", ":BufferLineCyclePrev<CR>")
+vim.keymap.set("n", "<A-h>", ":BufferLineCyclePrev<CR>")
 vim.keymap.set("n", "<A-l>", ":BufferLineCycleNext<CR>")
+vim.keymap.set("n", "<S-h>", ":BufferLineMovePrev<CR>")
+vim.keymap.set("n", "<S-l>", ":BufferLineMoveNext<CR>")
 vim.keymap.set("n", "<leader>td", ":BufferLinePickClose<CR>")
 vim.keymap.set("n", "<leader>ta", ":BufferLineCloseOthers<CR>")
 vim.keymap.set("n", "<leader>te", ":BufferLineCloseAllButCurrent<CR>")
@@ -51,4 +53,4 @@ vim.api.nvim_create_user_command("BufferLineDeleteCurrent",
   , { range = true })
 vim.keymap.set("n", "<leader>4", "<cmd>BufferLineDeleteCurrent<cr>", { desc = "Delete Current Buffer" })
 
-vim.keymap.set("n", "<leader>r", "<Cmd>Telescope frecency workspace=CWD <CR>")
+vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency workspace=CWD <CR>")
