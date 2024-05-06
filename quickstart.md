@@ -2,7 +2,18 @@ git clone this config to get access to the neovim
 
 but for certain plugins to work properly, you will need to install the following:
 
-sudo apt install the following:
+
+Note: for fzf using the git method as it allows us to install the keybinds for bash terminal like ctrl + t for fzf as well as auto source the files
+
+To override the controls, you want to put your export keybindings into .bashrc
+e.g. 
+export FZF_DEFAULT_OPTS='--bind alt-j:down,alt-k:up'
+
+If you want more information, you can view the keybinds in
+.fzf/shell/key-bindings.bash
+
+
+Install the following:
 1. ripgrep -> allows searching for specific text in files
 2. fzf -> fuzzy finder to search find files and directories when using telescope
 3. tmux -> terminal multiplexer (read tmux.md)
