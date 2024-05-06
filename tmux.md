@@ -3,8 +3,8 @@
 # create a new .tmux.conf file in tmux folder or just use nvim ~/.tmux.conf
 # copy the following configuration to the file
 # run source ~/.tmux.conf to apply the changes
-# ctrl + r then shift + i to install plugins
-# ctrl + r then shift + u to update plugins
+# ctrl + s then shift + i to install plugins
+# ctrl + s then shift + u to update plugins
 # ctrl + s then ctrl + r to restore session
 # from now on, just go into terminal and type tmux to start a new session then nvim to start editing, ctrl + r then | or - to split window
 # ctrl + r then h, j, k, l to resize the windows
