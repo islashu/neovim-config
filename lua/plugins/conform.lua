@@ -17,7 +17,7 @@ return {
   opts = function()
     local opts = {
       formatters_by_ft = {
-        lua = { "prettier" },
+        lua = { "stylua" },
         python = { "black" },
         javascript = { "prettier" },
         typescript = { "prettier" },
