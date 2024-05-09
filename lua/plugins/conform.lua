@@ -26,8 +26,8 @@ return {
   opts = function()
     local opts = {
       formatters_by_ft = {
-        lua = { "stylua" },
-        python = { "prettier" },
+        lua = { "prettier" },
+        python = { "black" },
         javascript = { "prettier" },
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
@@ -39,11 +39,6 @@ return {
         markdown = { "prettier" },
         graphql = { "prettier" },
         php = { "prettier" },
-      },
-      formatters = {
-        prettier = {
-          --global prettier configs
-        },
       },
     }
     return opts
@@ -64,5 +59,6 @@ return {
   --     end, { range = true }),
   --   })
   -- end,
-  keys = { { "<leader>cf", "<cmd>Format<cr>", desc = "Format" } },
+  -- keys = { { "<leader>cf", "<cmd>Format<cr>", desc = "Format" } },
+  keys = { { "<leader>cf", require("conform").format(), desc = "Format" } },
 }
