@@ -1,26 +1,17 @@
 return {
   "stevearc/conform.nvim",
-  -- This is a configurer for formatters and linters all in one place, does not do any formatting, you will need to install the formatters and linters yourself
-  -- e.g. prettier
-  -- For prettier to work, you will need to globally npm install prettier or locally
-  -- as of right now locally work with @prettier/plugin-php, globally, the path could not find the right path an always give the unable to find package error in conform.log
+
+  -- Conform is a wrapper for other formatter, what is does is that the real formatters are cmdline only,
+  -- Conform converts your current commands that the cmdline formatters can understand and then they relay the changes back to the buffer
+  -- we can decide what formatter to use for each filetype, if you want to install a specific formatter you can do it with the package manager
+  -- using mason, just do :Mason then go to the formatter page and press i the change the value here to the name of the formatter that you want to use
   --
-  -- tldr:
-  -- 1. npm install --save-dev prettier @prettier/plugin-php
-  -- 2. add node_modules -> gitignore and the package.json file to your project if not js project
-  -- 3. add the formatters_by_ft to the opts function
-  -- 4. create a .prettierrc file in the root of your project (does not matter if there are my projects, just make sure it is in the root of the project)
-  -- 5. Do not download prettier extension via lazyvim overrides the @prettier/plugin-php, @ goes to the nearest prettier plugin
-  --
-  -- e.g of .prettierrc
-  -- {
-  --     "plugins": ["@prettier/plugin-php"],
-  --     "tabWidth": 4,
-  --     "braceStyle": "1tbs",
-  --     "printWidth": 500, #how long the line should be before it wraps
-  -- }
-  --
-  --
+  -- in the case of prettier, unlike other formatters which only supports one language, prettier supports multiple languages, the one installed via mason
+  -- only supports javascript, typescript, css, html, json, yaml, markdown, graphql, php, if you want to use prettier for other languages you need to install
+  -- the plugins via npm, but the problem is that the plugins don't go to the correct directory and therefore cause error when trying to format the file
+  -- on top of this, you will also need to add a prettierrc file.
+
+
   lazy = true,
   event = { "BufReadPre", "BufNewFile" },
   opts = function()
