@@ -1,4 +1,5 @@
 return {
+  -- (Explanation) This sets up the LSP connection for the editor to talk to the language server.
   "neovim/nvim-lspconfig",
   event = "LazyFile",
   dependencies = {
@@ -7,9 +8,9 @@ return {
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
+  -- (Explanation)
   ---@class PluginLspOpts
   opts = {
-    -- options for vim.diagnostic.config()
     ---@type vim.diagnostic.Opts
     diagnostics = {
       underline = true,
@@ -18,9 +19,6 @@ return {
         spacing = 4,
         source = "if_many",
         prefix = "●",
-        -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-        -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-        -- prefix = "icons",
       },
       severity_sort = true,
       signs = {
@@ -44,11 +42,7 @@ return {
     codelens = {
       enabled = false,
     },
-    -- add any global capabilities here
     capabilities = {},
-    -- options for vim.lsp.buf.format
-    -- `bufnr` and `filter` is handled by the LazyVim formatter,
-    -- but can be also overridden when specified
     format = {
       formatting_options = nil,
       timeout_ms = nil,
@@ -56,42 +50,10 @@ return {
     -- (Explanation) LSP Server Settings, you must insert the specific language server here to allow for autocomplete for the language
     ---@type lspconfig.options
     servers = {
-      lua_ls = {
-        -- mason = false, -- set to false if you don't want this server to be installed with mason
-        -- Use this to add any additional keymaps
-        -- for specific lsp servers
-        ---@type LazyKeysSpec[]
-        -- keys = {},
-        settings = {
-          Lua = {
-            workspace = {
-              checkThirdParty = false,
-            },
-            codeLens = {
-              enable = true,
-            },
-            completion = {
-              callSnippet = "Replace",
-            },
-          },
-        },
-      },
-      cssls = {},
-      pyright = {},
-      html = {},
+      -- (Explanation) you can either add the lsp here or go to the mason menu to download the lsp servers which are must easier
     },
-    -- you can do any additional lsp server setup here
-    -- return true if you don't want this server to be setup with lspconfig
     ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-    setup = {
-      -- example to setup with typescript.nvim
-      -- tsserver = function(_, opts)
-      --   require("typescript").setup({ server = opts })
-      --   return true
-      -- end,
-      -- Specify * to use this function as a fallback for any server
-      -- ["*"] = function(server, opts) end,
-    },
+    setup = {},
   },
   ---@param opts PluginLspOpts
   config = function(_, opts)
@@ -224,13 +186,12 @@ return {
       end)
     end
 
+    -- (Explanation) This does not download the LSP servers, mason does that, this is to configure mason as well as run the LSP servers.
+    -- Since you will have to run the servers after downloading.
     require("mason-lspconfig").setup({
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
           server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
           require("lspconfig")[server_name].setup(server)
         end,

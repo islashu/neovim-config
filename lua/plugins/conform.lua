@@ -11,7 +11,6 @@ return {
   -- the plugins via npm, but the problem is that the plugins don't go to the correct directory and therefore cause error when trying to format the file
   -- on top of this, you will also need to add a prettierrc file.
 
-
   lazy = true,
   event = { "BufReadPre", "BufNewFile" },
   opts = function()

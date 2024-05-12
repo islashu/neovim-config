@@ -1,4 +1,5 @@
 return {
+  -- (Explanation) This is a downloader for the LSP servers, it will automatically download the LSP servers for you if you have manually
   "williamboman/mason.nvim",
   cmd = "Mason",
   keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
