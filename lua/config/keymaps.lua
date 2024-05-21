@@ -54,3 +54,6 @@ vim.api.nvim_create_user_command("BufferLineDeleteCurrent",
 vim.keymap.set("n", "<leader>4", "<cmd>BufferLineDeleteCurrent<cr>", { desc = "Delete Current Buffer" })
 
 vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency workspace=CWD <CR>")
+
+vim.keymap.set("v", "<C-r>",'"hy:%s/<C-r>h//gc<left><left><left>')
+
