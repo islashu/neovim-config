@@ -57,3 +57,7 @@ vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency workspace=CWD <
 
 vim.keymap.set("v", "<C-r>",'"hy:%s/<C-r>h//gc<left><left><left>')
 
+
+vim.keymap.set("v", "<A-j>", "}")
+vim.keymap.set("v", "<A-k>", "{")
+
