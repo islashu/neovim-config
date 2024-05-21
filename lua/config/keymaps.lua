@@ -55,8 +55,15 @@ vim.keymap.set("n", "<leader>4", "<cmd>BufferLineDeleteCurrent<cr>", { desc = "D
 
 vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency workspace=CWD <CR>")
 
-vim.keymap.set("v", "<C-r>",'"hy:%s/<C-r>h//gc<left><left><left>')
+-- https://stackoverflow.com/questions/18020381/vim-search-and-replace-using-current-line-as-reference-point
+-- For  replacing from current line onwards
+vim.keymap.set("v", "<leader>rc",'"hy:.,$s/<C-r>h//gc<left><left><left>')
 
+-- For replacing the entire file at one go
+vim.keymap.set("v", "<leader>rf",'"hy:.,%s/<C-r>h//g<left><left>')
+
+-- For replacing words in all opened files/buffers, amazing for replacing multiples files at once
+vim.keymap.set("v", "<leader>rb",'hy:bufdo %s/<C-r>h//g<left><left>')
 
 vim.keymap.set("v", "<A-j>", "}")
 vim.keymap.set("v", "<A-k>", "{")
