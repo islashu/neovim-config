@@ -30,7 +30,7 @@ bind-key l select-pane -R
 set -s escape-time 0
 
 # split panes using | and -
-bind | split-window -h
+bind \ split-window -h
 bind - split-window -v
 
 
@@ -46,8 +46,8 @@ bind w new-window
 bind C-p previous-window
 bind C-n next-window
 
-# close window
-bind c confirm-before kill-window
+# close plane
+bind x kill-pane
 
 
 set -g @plugin 'tmux-plugins/tpm'
@@ -74,12 +74,24 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 # dracula theme
 set -g @plugin 'dracula/tmux'
 
+set -g @dracula-plugins "cpu-usage ram-usage weather time date "
+set -g @dracula-show-timezone true
 set -g @dracula-showpowerline true
-set -g @dracula-fixed-location "top"
-set -g @dracula-plugins "weather"
+set -g @dracula-fixed-location "singapore"
+set -g @dracula-continuum-mode time
+set -g @dracula-continuum-time-threshold 60
 set -g @dracula-show-flags true
 set -g @dracula-show-left-icon session
+set -g @dracula-show-fahrenheit false
 set -g status-position top  
+set -g @dracula-show-ssh-session-port true
+set -g @dracula-time-format "%F %R"
+
+## Update the saved session every five minuets.
+set -g @continuum-save-interval '2'
+
+## Enable automatic session restoring.
+set -g @continuum-restore 'on'
 
 run '~/.tmux/plugins/tpm/tpm'
 

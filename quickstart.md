@@ -30,5 +30,32 @@ unless you can get global prettier to work
 
 
 
+////////////.bashrc config
+
+. "$HOME/.cargo/env"
+export PATH=$PATH:/home/benjamin/.local/share/bob/nvim-bin
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias py=python3
+alias python=python3
+alias p=python3
+
+# Override for fzf key bindings
+export FZF_DEFAULT_OPTS='--bind alt-j:down,alt-k:up'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+bind "$(bind -s | grep fzf_history | sed 's/r/f/')"
+bind '"\C-r": reverse-search-history'
+
+export PATH=$PATH:/usr/local/go/bin
+
+# export location of where neovide is 
+export PATH=$PATH:/home/benjamin/.cargo/bin
+
+
 
 
