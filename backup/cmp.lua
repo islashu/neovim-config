@@ -67,6 +67,23 @@ return {
       TypeParameter = "",
     }
 
+    -- Custom functions --
+    local function format_ghost_text(entry, vim_item)
+      -- Check if the source is Co-pilot
+      if entry.source.name == "co-pilot" then
+        vim_item.menu = "[Co-pilot]"
+      end
+      return vim_item
+    end
+
+    local has_words_before = function()
+      if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+        return false
+      end
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+    end
+
     cmp.setup({
       snippet = {
         expand = function(args)
@@ -78,26 +95,26 @@ return {
       --   debounce = 500,
       -- },
 
-      -- sorting = {
-      --   priority_weight = 2,
-      --   comparators = {
-      --     require("copilot_cmp.comparators").prioritize,
-      --
-      --     -- Below is the default comparitor list and order for nvim-cmp
-      --     cmp.config.compare.offset,
-      --     -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-      --     cmp.config.compare.exact,
-      --     cmp.config.compare.score,
-      --     cmp.config.compare.locality,
-      --     cmp.config.compare.recently_used,
-      --     cmp.config.compare.kind,
-      --     cmp.config.compare.sort_text,
-      --     cmp.config.compare.length,
-      --     cmp.config.compare.order,
-      --   },
-      -- },
-      -- Control keymaps for cmp here
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          require("copilot_cmp.comparators").prioritize,
+
+          -- Below is the default comparitor list and order for nvim-cmp
+          cmp.config.compare.offset,
+          -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.locality,
+          cmp.config.compare.recently_used,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      },
       mapping = cmp.mapping.preset.insert({
+        -- Control keymaps for cmp here
         ["<A-k>"] = cmp.mapping.select_prev_item(),
         ["<A-j>"] = cmp.mapping.select_next_item(),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1)),
@@ -108,9 +125,29 @@ return {
           c = cmp.mapping.close(),
         }),
 
-        -- select = false, prevents automatic selections of the first item when pressing enter, the idea is that you want to only select something if you highlight it
+        -- (Ben) select = false, prevents automatic selections of the first item when pressing enter, the idea is that you want to only select something if you highlight it
         ["<CR>"] = cmp.mapping(cmp.mapping.confirm({ select = false })),
 
+        -- Modified the tab key to allow for copilot to be used, no longer necessary
+        -- ["<Tab>"] = cmp.mapping(function(fallback)
+        --   local copilot = require("copilot.suggestion")
+        --   if copilot.is_visible() then
+        --     copilot.accept()
+        --     cmp.confirm()
+        --   elseif cmp.visible() then
+        --     local entry = cmp.get_selected_entry()
+        --     if not entry then
+        --       cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        --       -- cmp.confirm()
+        --     else
+        --       cmp.confirm()
+        --     end
+        --   elseif luasnip.expand_or_jumpable() then
+        --     luasnip.expand_or_jump()
+        --   else
+        --     fallback()
+        --   end
+        -- end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
@@ -150,7 +187,7 @@ return {
         { name = "luasnip" },
         { name = "nvim_lua" },
         { name = "buffer" },
-        -- { name = "neorg" },
+        { name = "neorg" },
         -- { name = "cmdline" },
       },
       confirm_opts = {

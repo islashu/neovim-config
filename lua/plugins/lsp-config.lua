@@ -1,200 +1,122 @@
 return {
-  -- (Explanation) This sets up the LSP connection for the editor to talk to the language server.
-  "neovim/nvim-lspconfig",
-  event = "LazyFile",
+  -- (Plugin definition)
+  -- LSP-zero is a plugin that allows you to setup LSP servers with ease. It is a wrapper
+  -- on top of the different dependencies below. Normally you will need to set up all the lsp
+  -- servers somewhat manually, you can see the amount of code that is needed to set up the lua
+  -- servers in lazyVim. This plugin does this automatically for you.
+  --
+  -- There are a lot of things to note here, just have autocomplete and detections of errors
+  -- and warnings. The logic is handled by lsp, which are downloaded through mason. Mason just
+  -- does the downloading. You still need to attach the lsp to the buffer(buffer is a complex way or saying
+  -- the file that you are currently editing). This is done by mason-lspconfig. Mason-lspconfig
+  -- has a function called setup which will attach the lsp to the buffer by checking its filetype.
+  -- nvim-lspconfig is the plugin that has the configuration for the lsp servers but now you can do
+  -- this through lsp-zero. Displaying the information as autocomplete through cmp which is another plugin
+  -- it is a UI for autocomplete. This UI also takes in informtion from different sources like snippets
+  -- lsp for autocomplete, text suggestions, copilot etc.
+  "VonHeikemen/lsp-zero.nvim",
   dependencies = {
-    { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-    { "folke/neodev.nvim", opts = {} },
-    "mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    {
+      "neovim/nvim-lspconfig", -- For attaching LSP to the buffer
+    },
+    {
+      "williamboman/mason.nvim",
+      cmd = "Mason",
+      keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+      build = ":MasonUpdate",
+    }, -- For installing LSP, linters, formatters
+    {
+      "williamboman/mason-lspconfig.nvim", -- Prepares lsp with necessary configuration before attachment to the buffer
+    },
   },
-  -- (Explanation)
-  ---@class PluginLspOpts
-  opts = {
-    ---@type vim.diagnostic.Opts
-    diagnostics = {
-      underline = true,
-      update_in_insert = false,
-      virtual_text = {
-        spacing = 4,
-        source = "if_many",
-        prefix = "●",
-      },
-      severity_sort = true,
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = LazyVim.config.icons.diagnostics.Error,
-          [vim.diagnostic.severity.WARN] = LazyVim.config.icons.diagnostics.Warn,
-          [vim.diagnostic.severity.HINT] = LazyVim.config.icons.diagnostics.Hint,
-          [vim.diagnostic.severity.INFO] = LazyVim.config.icons.diagnostics.Info,
-        },
-      },
-    },
-    -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
-    -- Be aware that you also will need to properly configure your LSP server to
-    -- provide the inlay hints.
-    inlay_hints = {
-      enabled = false,
-    },
-    -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
-    -- Be aware that you also will need to properly configure your LSP server to
-    -- provide the code lenses.
-    codelens = {
-      enabled = false,
-    },
-    capabilities = {},
-    format = {
-      formatting_options = nil,
-      timeout_ms = nil,
-    },
-    -- (Explanation) LSP Server Settings, you must insert the specific language server here to allow for autocomplete for the language
-    ---@type lspconfig.options
-    servers = {
-      -- (Explanation) you can either add the lsp here or go to the mason menu to download the lsp servers which are must easier
-    },
-    ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-    setup = {},
-  },
-  ---@param opts PluginLspOpts
-  config = function(_, opts)
-    if LazyVim.has("neoconf.nvim") then
-      local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
-      require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
-    end
+  config = function()
+    local lsp_zero = require("lsp-zero")
 
-    -- setup autoformat
-    LazyVim.format.register(LazyVim.lsp.formatter())
-
-    -- setup keymaps
-    LazyVim.lsp.on_attach(function(client, buffer)
-      require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
-    end)
-
-    local register_capability = vim.lsp.handlers["client/registerCapability"]
-
-    vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
-      ---@diagnostic disable-next-line: no-unknown
-      local ret = register_capability(err, res, ctx)
-      local client = vim.lsp.get_client_by_id(ctx.client_id)
-      local buffer = vim.api.nvim_get_current_buf()
-      require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
-      return ret
-    end
-
-    -- diagnostics signs
-    if vim.fn.has("nvim-0.10.0") == 0 then
-      for severity, icon in pairs(opts.diagnostics.signs.text) do
-        local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
-        name = "DiagnosticSign" .. name
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-      end
-    end
-
-    -- inlay hints
-    if opts.inlay_hints.enabled then
-      LazyVim.lsp.on_attach(function(client, buffer)
-        if client.supports_method("textDocument/inlayHint") then
-          LazyVim.toggle.inlay_hints(buffer, true)
-        end
-      end)
-    end
-
-    -- code lens
-    if opts.codelens.enabled and vim.lsp.codelens then
-      LazyVim.lsp.on_attach(function(client, buffer)
-        if client.supports_method("textDocument/codeLens") then
-          vim.lsp.codelens.refresh()
-          --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-            buffer = buffer,
-            callback = vim.lsp.codelens.refresh,
-          })
-        end
-      end)
-    end
-
-    if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-      opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-        or function(diagnostic)
-          local icons = require("lazyvim.config").icons.diagnostics
-          for d, icon in pairs(icons) do
-            if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-              return icon
-            end
-          end
-        end
-    end
-
-    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
-
-    local servers = opts.servers
-    local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-    local capabilities = vim.tbl_deep_extend(
-      "force",
-      {},
-      vim.lsp.protocol.make_client_capabilities(),
-      has_cmp and cmp_nvim_lsp.default_capabilities() or {},
-      opts.capabilities or {}
-    )
-
-    local function setup(server)
-      local server_opts = vim.tbl_deep_extend("force", {
-        capabilities = vim.deepcopy(capabilities),
-      }, servers[server] or {})
-
-      if opts.setup[server] then
-        if opts.setup[server](server, server_opts) then
-          return
-        end
-      elseif opts.setup["*"] then
-        if opts.setup["*"](server, server_opts) then
-          return
-        end
-      end
-      require("lspconfig")[server].setup(server_opts)
-    end
-
-    -- get all the servers that are available through mason-lspconfig
-    local have_mason, mlsp = pcall(require, "mason-lspconfig")
-    local all_mslp_servers = {}
-    if have_mason then
-      all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-    end
-
-    local ensure_installed = {} ---@type string[]
-    for server, server_opts in pairs(servers) do
-      if server_opts then
-        server_opts = server_opts == true and {} or server_opts
-        -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-        if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-          setup(server)
-        elseif server_opts.enabled ~= false then
-          ensure_installed[#ensure_installed + 1] = server
-        end
-      end
-    end
-
-    if have_mason then
-      mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
-    end
-
-    if LazyVim.lsp.get_config("denols") and LazyVim.lsp.get_config("tsserver") then
-      local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
-      LazyVim.lsp.disable("tsserver", is_deno)
-      LazyVim.lsp.disable("denols", function(root_dir)
-        return not is_deno(root_dir)
-      end)
-    end
-
-    -- (Explanation) This does not download the LSP servers, mason does that, this is to configure mason as well as run the LSP servers.
-    -- Since you will have to run the servers after downloading.
+    require("mason").setup({})
     require("mason-lspconfig").setup({
       handlers = {
+
+        ----------- Automatically setup LSP servers using nvim-lspconfig once downloaded using Mason ------------
         function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
+          require("lspconfig")[server_name].setup({})
         end,
+        ----------- Automatically setup LSP servers once downloaded using Mason ------------
+
+        ----------- Custom configuration of each server here, copy and paste ------------
+
+        -- diagnosticls LSP
+        diagnosticls = function()
+          local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+          local diagnostic_cfg = {
+            enable = true,
+            underline = true,
+            float = {
+              -- focusable = false,
+              -- style = "minimal",
+              source = "always",
+            },
+            signs = {
+              text = {
+                [vim.diagnostic.severity.ERROR] = signs.Error,
+                [vim.diagnostic.severity.WARN] = signs.Warn,
+                [vim.diagnostic.severity.HINT] = signs.Hint,
+                [vim.diagnostic.severity.INFO] = signs.Info,
+              },
+              texthl = {
+                [vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
+                [vim.diagnostic.severity.WARN] = "DiagnosticDefault",
+                [vim.diagnostic.severity.HINT] = "DiagnosticDefault",
+                [vim.diagnostic.severity.INFO] = "DiagnosticDefault",
+              },
+              numhl = {
+                [vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
+                [vim.diagnostic.severity.WARN] = "DiagnosticDefault",
+                [vim.diagnostic.severity.HINT] = "DiagnosticDefault",
+                [vim.diagnostic.severity.INFO] = "DiagnosticDefault",
+              },
+              severity_sort = true,
+            },
+          }
+          vim.diagnostic.config(diagnostic_cfg)
+          require("lspconfig").diagnosticls.setup({})
+        end,
+
+        -- Lua LSP
+        lua_ls = function()
+          local lua_opts = lsp_zero.nvim_lua_ls({
+            -- custom opts for lua_opts here
+            on_attach = function(client, bufnr) end,
+          })
+          require("lspconfig").lua_ls.setup(lua_opts)
+        end,
+
+        tsserver = function()
+          require("lspconfig").tsserver.setup({
+            settings = {
+              typescript = {
+                inlayHints = {
+                  includeInlayParameterNameHints = "all",
+                  includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                  includeInlayFunctionParameterTypeHints = true,
+                  includeInlayVariableTypeHints = true,
+                  includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                  includeInlayPropertyDeclarationTypeHints = true,
+                  includeInlayFunctionLikeReturnTypeHints = true,
+                  includeInlayEnumMemberValueHints = true,
+                },
+              },
+            },
+            on_attach = function(client, bufnr)
+              client.server_capabilities.documentFormattingProvider = false
+
+              local ts_utils = require("nvim-lsp-ts-utils")
+              ts_utils.setup({})
+              ts_utils.setup_client(client)
+            end,
+          })
+        end,
+
+        ----------- Custom configuration of each server here, copy and paste ------------
       },
     })
   end,

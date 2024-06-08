@@ -30,11 +30,7 @@ return {
       },
 
       -- Custom Highlights --
-      colors = {
-        -- bright_orange = "#ff8800", -- define a new color
-        -- green = "#00ffaa",
-        bg_highlight = "#1b1b1b",
-      }, -- Override default colors
+      colors = {}, -- Override default colors
       highlights = {}, -- Override highlight groups
 
       -- Plugins Config --
