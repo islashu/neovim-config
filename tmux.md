@@ -2,6 +2,7 @@
 # sudo apt-get tmux
 # create a new .tmux.conf file in tmux folder or just use nvim ~/.tmux.conf
 # copy the following configuration to the file
+# Run git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm -> to get the plugin manager to install the necessary plugins
 # run source ~/.tmux.conf to apply the changes
 # ctrl + s then shift + i to install plugins
 # ctrl + s then shift + u to update plugins
