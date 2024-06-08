@@ -77,7 +77,7 @@ set -g @plugin 'dracula/tmux'
 set -g @dracula-plugins "cpu-usage ram-usage weather time date "
 set -g @dracula-show-timezone true
 set -g @dracula-showpowerline true
-set -g @dracula-fixed-location "singapore"
+set -g @dracula-fixed-location "Singapore"
 set -g @dracula-continuum-mode time
 set -g @dracula-continuum-time-threshold 60
 set -g @dracula-show-flags true
@@ -95,5 +95,6 @@ set -g @continuum-restore 'on'
 
 run '~/.tmux/plugins/tpm/tpm'
 
-
+## Remember to souce tmux
+## tmux source ~/.tmux.conf
 
