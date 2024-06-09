@@ -9,6 +9,11 @@ vim.g.autoformat = false
 vim.opt.list = false
 -- (Explanation) Set the clipboard to use the system clipboard for copy and paste
 vim.opt.clipboard = "unnamedplus"
+vim.opt.autoindent = true
 vim.opt.smartindent = false
-
 vim.g.lsp_zero_extend_lspconfig = 0
+vim.opt.scrolloff = 5
+vim.opt.smarttab = false
+vim.opt.backspace = { "start", "eol", "indent" }
+vim.opt.path:append({ "**" })
+vim.opt.wildignore:append({ "*/node_modules/*" })
