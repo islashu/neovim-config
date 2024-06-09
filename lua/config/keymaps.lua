@@ -41,19 +41,6 @@ vim.keymap.del("n", "<c-/>")
 vim.keymap.set("n", "<C-/>", "<cmd>close<cr>")
 vim.keymap.set("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
--- Custom function to delete current buffer
-vim.api.nvim_create_user_command("BufferLineDeleteCurrent", function()
-  local current = vim.fn.bufnr("%")
-  local buflist = vim.fn.getbufinfo({ buflisted = 1 })
-  for _, buf in ipairs(buflist) do
-    if buf.bufnr == current then
-      -- close neo tree
-      vim.cmd([[Neotree close]])
-      vim.cmd("bdelete " .. buf.bufnr)
-      return
-    end
-  end
-end, { range = true })
 vim.keymap.set("n", "<leader>4", "<cmd>BufferLineDeleteCurrent<cr>", { desc = "Delete Current Buffer" })
 
 vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency workspace=CWD <CR>")
