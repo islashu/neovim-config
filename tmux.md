@@ -95,9 +95,7 @@ set -g @continuum-save-interval '2'
 set -g @continuum-restore 'on'
 
 ## Fix terminal not using neovim theme
-set -g default-terminal "xterm"
-
-run '~/.tmux/plugins/tpm/tpm'
+set -g default-terminal "xterm-256color"run '~/.tmux/plugins/tpm/tpm'
 
 ## Remember to souce tmux
 ## tmux source ~/.tmux.conf
