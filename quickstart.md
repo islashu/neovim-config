@@ -56,6 +56,9 @@ export PATH=$PATH:/usr/local/go/bin
 # export location of where neovide is 
 export PATH=$PATH:/home/benjamin/.cargo/bin
 
+# Fix issue of tmux not using neovim theme
+alias tmux="TERM=screen-256color-bce tmux"
+
 
 
 

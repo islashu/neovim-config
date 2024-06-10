@@ -94,6 +94,9 @@ set -g @continuum-save-interval '2'
 ## Enable automatic session restoring.
 set -g @continuum-restore 'on'
 
+## Fix terminal not using neovim theme
+set -g default-terminal "xterm"
+
 run '~/.tmux/plugins/tpm/tpm'
 
 ## Remember to souce tmux
