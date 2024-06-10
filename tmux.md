@@ -11,6 +11,14 @@
 # ctrl + r then h, j, k, l to resize the windows
 
 
+# Commands for running tmux sessions
+# tmux -> start a new session
+# tmux new -s <session-name> -> start a new session with a name
+# tmux ls -> list all the sessions
+# tmux attach -t <session-name> -> attach to a session
+# tmux kill-session -t <session-name> -> kill a session
+# tmux kill-server -> kill all the sessions
+
 
 
 # TMUX configuration
@@ -91,12 +99,15 @@ set -g @dracula-time-format "%F %R"
 ## Update the saved session every five minuets.
 set -g @continuum-save-interval '2'
 
-## Enable automatic session restoring.
-set -g @continuum-restore 'on'
+## Enable automatic session restoring, turning this on creates issue of always having a new session
+set -g @continuum-restore 'off'
 
 ## Fix terminal not using neovim theme
 set -g default-terminal "xterm-256color"run '~/.tmux/plugins/tpm/tpm'
 
 ## Remember to souce tmux
 ## tmux source ~/.tmux.conf
+
+
+
 
