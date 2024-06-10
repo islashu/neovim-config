@@ -1,33 +1,37 @@
-Note this is an example of a prettierrv file with multiple languages. You can add as many languages as you want.
-override the files with the language you want to format and add the options you want to use.
-
-You no longer need to have multiple .prettierrc files for different languages. You can now have a single .prettierrc file with multiple languages.
-
 {
-  "plugins": ["@prettier/plugin-php", "@prettier/plugin-lua"],
+  "plugins": ["@prettier/plugin-php"],
   "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "tabWidth": 4,
+        "semi": true
+      }
+    },
     {
       "files": "*.js",
       "options": {
-        "tabWidth": 2,
+        "tabWidth": 4,
         "semi": true,
-        "singleQuote": false
+        "singleQuote": false,
+        "printWidth": 200
       }
     },
     {
       "files": ["*.php"],
       "options": {
-        "tabWidth": 2,
+        "tabWidth": 4,
         "semi": true,
-        "singleQuote": false
+        "singleQuote": false,
+        "braceStyle": "1tbs"
       }
     },
     {
-      "files": ["*.lua"],
+      "files": ["*.html"],
       "options": {
-        "tabWidth": 1,
+        "tabWidth": 4,
         "semi": true,
-        "singleQuote": true
+        "singleQuote": false
       }
     }
   ]

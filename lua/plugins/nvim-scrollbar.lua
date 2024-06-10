@@ -1,3 +1,4 @@
+-- How to know how to call the specific file that contains the colours, you will have to look at the code of the plugin for colourscheme
 local colors = require("onedark.palette")["dark"]
 
 return {

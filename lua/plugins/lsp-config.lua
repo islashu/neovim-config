@@ -34,6 +34,21 @@ return {
 
     require("mason").setup({})
     require("mason-lspconfig").setup({
+      ---------- Automatic installation of lsp when starting neovim for the first time ----------
+      ensure_installed = {
+        "diagnosticls",
+        "lua_ls", -- Lua LSP
+        "tsserver", -- TypeScript, javascript LSP
+        "jsonls", -- JSON LSP
+        "html", -- HTML LSP
+        "cssls", -- CSS LSP
+        "gopls", -- Go LSP
+        "pyright", -- Python LSP
+        "rust_analyzer", -- Rust LSP
+        "intelephense", -- PHP LSP
+        "perlnavigator", -- Perl LSP
+        "jdtls", -- Java LSP
+      },
       handlers = {
 
         ----------- Automatically setup LSP servers using nvim-lspconfig once downloaded using Mason ------------
