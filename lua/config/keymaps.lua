@@ -1,7 +1,7 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Add any additional keymaps here:
 -- For autocompletion keymaps, see cmp.lua to assign keymaps
--- 
+--
 -- These are global keymaps that can be overwritten by the plugin keymaps that you
 -- define in the plugin folder. Plugin folders takes precedence over this file.
 -- This file is loaded first and then the plugin folders are loaded.

@@ -10,5 +10,5 @@ return {
   { "folke/flash.nvim", enabled = false },
   { "ggandor/leap.nvim", enabled = true },
   -- { "VonHeikemen/lsp-zero.nvim", enabled = false},
-  -- { "williamboman/mason-lspconfig.nvim", enabled =false},
+  -- { "williamboman/mason-lspconfig.nvim", enabled =false}, { "kylechui/nvim-surround", enabled = true},
 }

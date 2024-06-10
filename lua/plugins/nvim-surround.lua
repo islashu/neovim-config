@@ -12,6 +12,7 @@ return {
         visual = "S",
         visual_line = "gS",
         delete = "ds",
+        -- Note that c in insert mode might be slowed down due to this plugin, will be slightly delayed
         change = "cs",
         change_line = "cS",
       },
