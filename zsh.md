@@ -1,0 +1,36 @@
+If you want to beautify your terminal you will need download a new terminal similar to bash
+which is zsh since bash does not allow plugins. zsh does whatever bash does but better since there are plugins
+
+1. Install zsh terminal
+Run the following commands:
+sudo apt update && sudo apt upgrade
+sudo apt install zsh
+
+
+2. Install oh my zsh framework that sits on top of zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+Location of zsh: /usr/bin/zsh
+
+3. Switch shell froms bash -> zsh (You may need to restart your com for it to work)
+Run "chsh <Name of computer>"
+Run "echo $SHELL"
+
+if echo = bash, restart pc
+
+4. Setting up paths
+Once you switch you zsh, you are switching over to a totally different shell which means that you may need
+to reinstall some plugins and export the path in the ~/.zshrc
+
+There is a complete .zshrc template file with comments that you can copy and paste
+
+5. Install a theme 
+This can be done using the zinit package manager instead of directly git cloning the powerlevel 10k theme
+You may choose whatever theme you may like
+
+if you are using zinit to download you can just refer to the template
+if you are using git, then you need to specific the theme as THEME="powerlevel10k"
+
+6. Refer to this very well done configuration if you are lost for the .zshrc
+https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
+
