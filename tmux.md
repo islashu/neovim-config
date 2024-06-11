@@ -1,27 +1,3 @@
-# Use tmux
-# sudo apt-get tmux
-# create a new .tmux.conf file in tmux folder or just use nvim ~/.tmux.conf
-# copy the following configuration to the file
-# Run git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm -> to get the plugin manager to install the necessary plugins
-# run source ~/.tmux.conf to apply the changes
-# ctrl + s then shift + i to install plugins
-# ctrl + s then shift + u to update plugins
-# ctrl + s then ctrl + r to restore session
-# from now on, just go into terminal and type tmux to start a new session then nvim to start editing, ctrl + r then | or - to split window
-# ctrl + r then h, j, k, l to resize the windows
-
-
-# Commands for running tmux sessions
-# tmux -> start a new session
-# tmux new -s <session-name> -> start a new session with a name
-# tmux ls -> list all the sessions
-# tmux attach -t <session-name> -> attach to a session
-# tmux kill-session -t <session-name> -> kill a session
-# tmux kill-server -> kill all the sessions
-
-
-
-# TMUX configuration
 
 unbind r
 bind r source-file ~/.tmux.conf
@@ -39,7 +15,7 @@ bind-key l select-pane -R
 set -s escape-time 0
 
 # split panes using | and -
-bind \ split-window -h
+bind | split-window -h
 bind - split-window -v
 
 
@@ -99,15 +75,14 @@ set -g @dracula-time-format "%F %R"
 ## Update the saved session every five minuets.
 set -g @continuum-save-interval '2'
 
-## Enable automatic session restoring, turning this on creates issue of always having a new session
+## Enable automatic session restoring.
 set -g @continuum-restore 'off'
 
-## Fix terminal not using neovim theme
-set -g default-terminal "xterm-256color"run '~/.tmux/plugins/tpm/tpm'
+## Fix Colors
+set -g default-terminal "screen-256color"
+set -as terminal-features ",xterm-256color:RGB"
+
+run '~/.tmux/plugins/tpm/tpm'
 
 ## Remember to souce tmux
 ## tmux source ~/.tmux.conf
-
-
-
-
