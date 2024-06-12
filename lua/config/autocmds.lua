@@ -36,6 +36,17 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt.tabstop = 4
+    vim.opt.shiftwidth = 4
+    vim.opt.expandtab = true
+    vim.bo.softtabstop = 4
+  end,
+})
+
+
 -- Custom function
 -- Custom command line function, run :BufferLineDeleteCurrent on the cmdline within neovim
 -- You can extend the capabilities of this by assigning it to a vim.keymap
