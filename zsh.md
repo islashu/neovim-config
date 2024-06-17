@@ -34,11 +34,17 @@ if you are using git, then you need to specific the theme as THEME="powerlevel10
 6. Change terminal colorscheme, this affects the background
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)" # for one dark pro color scheme, you can search for other gnome terminal colorscheme
 
-7. Download fzf
+7. Download fzf, to search path
 Run "
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf 
 ~/.fzf/install
 "
+
+8. Install zoxide, a smarter version of cd without full path declaration
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+9. Update oh my zsh
+Run "omz update"
 
 Add the following to .zshrc
 ----- Add the following -------
