@@ -14,9 +14,9 @@ bind-key l select-pane -R
 # set pressing esc time to 0
 set -s escape-time 0
 
-# split panes using | and -
-bind | split-window -h
-bind - split-window -v
+# split panes using | and -, using this, you will not need to use the prefix key, but may run into complications.
+bind-key -n | split-window -h
+bind-key -n _ split-window -v
 
 
 
