@@ -34,6 +34,8 @@ bind C-n next-window
 # close plane
 bind x kill-pane
 
+# Allow mouse scrolling
+set -g mouse on 
 
 set -g @plugin 'tmux-plugins/tpm'
 # allows hjkl to move between planes
