@@ -29,6 +29,11 @@ return {
     harpoon:setup()
     vim.keymap.set("n", "<leader>a", function()
       harpoon:list():add()
+      vim.notify = require("notify")
+      vim.notify("File Added!", "info", {
+        title = "Harpoon",
+        timeout = 2000,
+      })
     end)
     vim.keymap.set("n", "<C-e>", function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
