@@ -5,11 +5,11 @@ bind r source-file ~/.tmux.conf
 set -g prefix C-s
 
 # act like vim
-setw -g mode-keys vi
-bind-key -r h select-pane -L
-bind-key -r j select-pane -D
-bind-key -r k select-pane -U
-bind-key -r l select-pane -R
+set -g mode-keys vi
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
 # set pressing esc time to 0
 set -s escape-time 0
 

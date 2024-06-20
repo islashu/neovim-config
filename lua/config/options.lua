@@ -9,7 +9,7 @@ vim.g.autoformat = false
 vim.opt.list = false
 -- (Explanation) Set the clipboard to use the system clipboard for copy and paste
 vim.opt.clipboard = "unnamedplus"
-vim.opt.autoindent = true
+vim.opt.autoindent = false
 vim.opt.smartindent = false
 vim.g.lsp_zero_extend_lspconfig = 0
 vim.opt.scrolloff = 5
