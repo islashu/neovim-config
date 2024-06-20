@@ -1,6 +1,7 @@
 unbind r
 bind r source-file ~/.tmux.conf
-
+# Must be set at the top of the file, else will not work
+set -option repeat-time 30000
 # change prefix key to C-s instead of C-b
 set -g prefix C-s
 
@@ -70,7 +71,6 @@ set -as terminal-features ",xterm-256color:RGB"
 # Set prefix mode to stay active in 30s, this allow for continuous use for the
 # prefix key without resetting after every key stroke, provided if you attach -r 
 # to the key. This is effectively a toggle mode
-set-option repeat-time 30000
 run '~/.tmux/plugins/tpm/tpm'
 
 ## Remember to souce tmux, run prefix + I for update plugin
