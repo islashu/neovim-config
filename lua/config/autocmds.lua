@@ -47,6 +47,36 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
+
+-- work in progress, lets try running this with toggleterm 
+-- vim.api.nvim_create_user_command("RunPythonFile", function()
+--   -- vim.api.nvim_create_augroup("runFileTypeWithTerminal", {clear = true})
+--   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "Output of Python file:" })
+--   end
+-- , { range = true })
+
+-- BufferWritePost means buffer, execute write command, then execute the following function
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--   group = vim.api.nvim_create_augroup("OpenTerminalRunFile", { clear = true }),
+--   pattern = "*.py",
+--   callback = function()
+--     -- get current buffer
+--     local bufnr = vim.api.nvim_get_current_buf()
+--     vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "Output of Python file:" })
+--     vim.fn.jobstart({"python3", vim.fn.expand('%:h')}, {
+--       stdout_buffered = true,
+--       on_stdout = function(_, data, _)
+--         vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
+--       end,
+--       on_stderr = function(_, data, _)
+--         vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
+--       end,
+--     })
+--
+--   end,
+--
+-- })
+
 -- Custom function
 -- Custom command line function, run :BufferLineDeleteCurrent on the cmdline within neovim
 -- You can extend the capabilities of this by assigning it to a vim.keymap

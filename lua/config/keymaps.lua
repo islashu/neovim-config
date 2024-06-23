@@ -9,6 +9,18 @@
 -- it is likely that an key define is faulty. So try defining the keymap in this file first
 -- and see if it works
 
+-- Set keymaps for terminal mode to allow for easy navigation with hjkl
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+end
+
 vim.keymap.set("i", "jj", "<Esc>")
 
 -- (Explanation) Create highlight groups to change copilot ghost text
@@ -33,16 +45,7 @@ vim.keymap.set("n", "<A-k>", "{")
 vim.keymap.set("n", "<s-p>", '"0p')
 vim.keymap.set("n", "<C-z>", "<Nop>")
 
--- Trying to remove terminal
-vim.keymap.set("n", "<c-/>", "<Nop>")
-vim.keymap.del("n", "<c-/>")
-
--- Toggle term
-vim.keymap.set("n", "<C-/>", "<cmd>close<cr>")
-vim.keymap.set("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-
 vim.keymap.set("n", "<leader>4", "<cmd>BufferLineDeleteCurrent<cr>", { desc = "Delete Current Buffer" })
-
 vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency workspace=CWD <CR>")
 
 -- https://stackoverflow.com/questions/18020381/vim-search-and-replace-using-current-line-as-reference-point
@@ -60,3 +63,7 @@ vim.keymap.set("v", "<A-k>", "{")
 
 vim.keymap.set("n", "[", "<C-o>")
 vim.keymap.set("n", "]", "<C-i>")
+
+-- Trying to remove terminal
+vim.keymap.del("n", "<c-/>")
+vim.keymap.del("t", "<c-/>")
