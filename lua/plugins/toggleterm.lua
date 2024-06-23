@@ -6,16 +6,20 @@ return {
       -- Basic configuration
       open_mapping = [[<c-t>]],
       direction = "vertical",
-      size = 40,
+      size = 50,
 
       -- keymap to run python file in terminal
       vim.keymap.set("n", "<leader>rr", function()
         local current_file_uri = vim.api.nvim_buf_get_name(0)
+        -- get file type
+        local file_type = vim.api.nvim_buf_get_option(0, "filetype")
         -- clear
-        require("toggleterm").exec("clear")
-        -- run python file in terminal
-
-        require("toggleterm").exec("python3" .. " " .. current_file_uri)
+        --
+        if file_type == "python" then
+          require("toggleterm").exec("clear")
+          -- run python file in terminal
+          require("toggleterm").exec("python3" .. " " .. current_file_uri)
+        end
       end, { desc = "Run command in terminal" }),
     })
   end,
