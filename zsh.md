@@ -34,7 +34,7 @@ if you are using git, then you need to specific the theme as THEME="powerlevel10
 6. Change terminal colorscheme, this affects the background
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)" # for one dark pro color scheme, you can search for other gnome terminal colorscheme
 
-7. Download fzf, to search path
+7. Download fzf, to search path, NOTE that the command must be two lines
 Run "
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf 
 ~/.fzf/install

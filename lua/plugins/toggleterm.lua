@@ -14,13 +14,12 @@ return {
         -- get file type
         local file_type = vim.api.nvim_buf_get_option(0, "filetype")
         -- clear
-        --
         if file_type == "python" then
           require("toggleterm").exec("clear")
           -- run python file in terminal
           require("toggleterm").exec("python3" .. " " .. current_file_uri)
         end
-      end, { desc = "Run command in terminal" }),
+      end, { desc = "Run file in terminal" }),
     })
   end,
 }
