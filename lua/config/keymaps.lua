@@ -11,14 +11,14 @@
 
 -- Set keymaps for terminal mode to allow for easy navigation with hjkl
 function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+  local opts = { buffer = 0 }
+  vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+  vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+  vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
 
 vim.keymap.set("i", "jj", "<Esc>")
@@ -50,13 +50,13 @@ vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency workspace=CWD <
 
 -- https://stackoverflow.com/questions/18020381/vim-search-and-replace-using-current-line-as-reference-point
 -- For  replacing from current line onwards
-vim.keymap.set("v", "<leader>rc", '"hy:.,$s/<C-r>h//gc<left><left><left>')
+vim.keymap.set("v", "<leader>rr", '"hy:.,$s/<C-r>h//gc<left><left><left>', { desc = "Rename variable with confirmation" })
 
 -- For replacing the entire file at one go
-vim.keymap.set("v", "<leader>rf", '"hy:.,%s/<C-r>h//g<left><left>')
+vim.keymap.set("v", "<leader>rf", '"hy:.,%s/<C-r>h//g<left><left>', { desc = "Rename variable in file" })
 
 -- For replacing words in all opened files/buffers, amazing for replacing multiples files at once
-vim.keymap.set("v", "<leader>rb", "hy:bufdo %s/<C-r>h//g<left><left>")
+vim.keymap.set("v", "<leader>rb", "hy:bufdo %s/<C-r>h//g<left><left>", { desc = "Rename variable in all opened buffers"})
 
 vim.keymap.set("v", "<A-j>", "}")
 vim.keymap.set("v", "<A-k>", "{")

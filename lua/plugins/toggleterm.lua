@@ -9,7 +9,7 @@ return {
       size = 50,
 
       -- keymap to run python file in terminal
-      vim.keymap.set("n", "<leader>rr", function()
+      vim.keymap.set("n", "<leader>tt", function()
         local current_file_uri = vim.api.nvim_buf_get_name(0)
         -- get file type
         local file_type = vim.api.nvim_buf_get_option(0, "filetype")
