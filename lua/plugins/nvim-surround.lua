@@ -4,7 +4,7 @@ return {
     require("nvim-surround").setup({
       keymaps = {
         insert = "'C-g's",
-        insert_line = "cC-gcS",
+        insert_line = "xC-gcS",
         normal = "ys",
         normal_cur = "yss",
         normal_line = "yS",
@@ -13,7 +13,7 @@ return {
         visual_line = "gS",
         delete = "ds",
         -- Note that c in insert mode might be slowed down due to this plugin, will be slightly delayed
-        change = "cs",
+        change = "xs",
         change_line = "cS",
       },
     })
