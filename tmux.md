@@ -26,6 +26,8 @@ bind-key -r right resize-pane -R 10
 bind-key -r left resize-pane -L 10
 
 unbind c
+unbind d
+
 bind w new-window
 bind C-p previous-window
 bind C-n next-window
@@ -40,7 +42,8 @@ set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'tmux-plugins/tmux-yank'
 
 # save tmux sessions
-set -g @resurrect-save 'S'
+
+set -g @resurrect-save 'c-s'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 # dracula theme

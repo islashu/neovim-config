@@ -4,7 +4,7 @@ return {
   -- { "stevearc/conform.nvim", enabled = false}
   { "nvimtools/none-ls.nvim", enabled = false },
   { "akinsho/toggleterm.nvim", enabled = true },
-  { "nmac427/guess-indent.nvim", enabled = false},
+  { "nmac427/guess-indent.nvim", enabled = true},
   -- { "zbirenbaum/copilot-cmp", enabled = false },
   { "zbirenbaum/copilot.lua", enabled = false },
   { "tris203/precognition.nvim", enabled = false },
