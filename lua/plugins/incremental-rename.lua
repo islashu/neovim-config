@@ -19,7 +19,7 @@ return {
       input_buffer_type = nil,
       -- callback to run after renaming, receives the result table (from LSP handler) as an argument
       post_hook = nil,
-      vim.keymap.set("n", "<leader>ra", ":IncRename ", { desc = "Rename/refactor globally" }),
+      vim.keymap.set("n", "<leader>rg", ":IncRename ", { desc = "Rename/refactor globally" }),
     })
   end,
 }

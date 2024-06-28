@@ -46,9 +46,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-
-
--- work in progress, lets try running this with toggleterm 
+-- work in progress, lets try running this with toggleterm
 -- vim.api.nvim_create_user_command("RunPythonFile", function()
 --   -- vim.api.nvim_create_augroup("runFileTypeWithTerminal", {clear = true})
 --   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "Output of Python file:" })
@@ -131,4 +129,12 @@ require("conform").setup({
     end
     require("conform").format({ async = true, lsp_fallback = true, range = range })
   end, { range = true }),
+})
+
+-- Run Copilot on certain files only
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = "*.py",
+  -- you could optionaly replace with
+  -- pattern = vim.fn.expand('~') .. '/dev/*',
+  command = "Copilot disable",
 })

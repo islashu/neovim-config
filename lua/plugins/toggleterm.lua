@@ -18,13 +18,13 @@ return {
         if file_type == "python" then
           require("toggleterm").exec("clear")
           -- run python file in terminal
-          require("toggleterm").exec("python3" .. " " .. current_file_uri)
+          require("toggleterm").exec("python3" .. " '" .. current_file_uri .. "'")
         end
 
         if file_type == "go" then
           require("toggleterm").exec("clear")
           -- run python file in terminal
-          require("toggleterm").exec("go run " .. "'" .. current_path_uri  .. "main.go" .. "'")
+          require("toggleterm").exec("go run " .. "'" .. current_path_uri .. "main.go" .. "'")
         end
       end, { desc = "Run file in terminal" }),
     })

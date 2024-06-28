@@ -50,14 +50,29 @@ vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency workspace=CWD <
 
 -- https://stackoverflow.com/questions/18020381/vim-search-and-replace-using-current-line-as-reference-point
 -- For  replacing from current line onwards
-vim.keymap.set("v", "<leader>rr", '"hy:.,$s/<C-r>h//gc<left><left><left>', { desc = "Rename variable with confirmation" })
-vim.keymap.set("n", "<leader>rr", 'viw"hy:.,$s/<C-r>h//gc<left><left><left>', { desc = "Rename variable with confirmation" })
+vim.keymap.set(
+  "v",
+  "<leader>rr",
+  '"hy:.,$s/<C-r>h//gc<left><left><left>',
+  { desc = "Rename variable with confirmation" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>rr",
+  'viw"hy:.,$s/<C-r>h//gc<left><left><left>',
+  { desc = "Rename variable with confirmation" }
+)
 
 -- For replacing the entire file at one go
 vim.keymap.set("v", "<leader>rf", '"hy:.,%s/<C-r>h//g<left><left>', { desc = "Rename variable in file" })
 
 -- For replacing words in all opened files/buffers, amazing for replacing multiples files at once
-vim.keymap.set("v", "<leader>rb", "hy:bufdo %s/<C-r>h//g<left><left>", { desc = "Rename variable in all opened buffers"})
+vim.keymap.set(
+  "v",
+  "<leader>rb",
+  "hy:bufdo %s/<C-r>h//g<left><left>",
+  { desc = "Rename variable in all opened buffers" }
+)
 
 vim.keymap.set("v", "<A-j>", "}")
 vim.keymap.set("v", "<A-k>", "{")
@@ -68,3 +83,14 @@ vim.keymap.set("n", "]", "<C-i>")
 -- Trying to remove terminal
 vim.keymap.del("n", "<c-/>")
 vim.keymap.del("t", "<c-/>")
+
+-- Lsp keymaps
+vim.keymap.set("n", "gdd", function()
+  -- To run keystroke in normal mode
+  vim.api.nvim_feedkeys("viw", "n", true)
+  -- open telescope "go to definition"
+  vim.cmd("Telescope lsp_definitions")
+  -- get telescope buffer
+  -- insert filenameCurrentBuffer into telescope search bar
+  -- vim.api.nvim_feedkeys( "p", "n", true)
+end, { desc = "Go to definition in file" })
