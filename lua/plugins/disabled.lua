@@ -10,6 +10,7 @@ return {
   { "tris203/precognition.nvim", enabled = false },
   { "folke/flash.nvim", enabled = true },
   { "ggandor/leap.nvim", enabled = false },
+  { "AckslD/nvim-neoclip.lua", enabled = false }, -- causing lag when quitting neovim
   -- { "VonHeikemen/lsp-zero.nvim", enabled = false},
   -- { "williamboman/mason-lspconfig.nvim", enabled =false}, { "kylechui/nvim-surround", enabled = true},
 }
