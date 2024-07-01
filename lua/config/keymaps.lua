@@ -84,6 +84,10 @@ vim.keymap.set("n", "]", "<C-i>")
 vim.keymap.del("n", "<c-/>")
 vim.keymap.del("t", "<c-/>")
 
+-- Change keymaps for code actions
+vim.keymap.set("n","<a-cr>", vim.lsp.buf.code_action, { desc = "Code Actions" })
+-- Change keymaps for jump to next error
+-- vim.keymap.set("n","<leader>ne",, { desc = "Code Actions" })
 -- Lsp keymaps
 vim.keymap.set("n", "gdd", function()
   -- To run keystroke in normal mode
